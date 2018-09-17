@@ -1,5 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
+import thunk from 'redux-thunk';
+
 import reducer from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -12,7 +14,7 @@ export default function configureStore(){
 	return createStore(
 		reducer,
 		composeEnhancers(
-        	applyMiddleware(navMiddleware)
+        	applyMiddleware(thunk, navMiddleware)
 		)
 	);
 }

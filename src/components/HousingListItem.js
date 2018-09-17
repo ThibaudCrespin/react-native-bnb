@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import Stars from './Stars'; 
+import Stars from './Stars';
 
-class HousingListItem extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <View style={styles.housing}>
-                <Image style={styles.image} source={{uri: this.props.housing.listing.picture.picture}}/>
-                <View style={styles.details}>
-                    <Text style={styles.category}>{this.props.housing.listing.space_type.toUpperCase()} - {this.props.housing.listing.guest_label.toUpperCase()}</Text>
-                    <Text style={styles.title}>{this.props.housing.listing.name}</Text>
-                    <Text style={styles.price}>{this.props.housing.pricing_quote.rate.amount_formatted} par nuit</Text>
-                    <Stars size={10} stars={this.props.housing.listing.star_rating}></Stars>
-                </View>
+function HousingListItem(props) {
+    return (
+        <View style={styles.housing}>
+            <Image style={styles.image} source={{ uri: props.housing.listing.picture.picture }} />
+            <View style={styles.details}>
+                <Text style={styles.category}>{props.housing.listing.space_type.toUpperCase()} - {props.housing.listing.guest_label.toUpperCase()}</Text>
+                <Text style={styles.title}>{props.housing.listing.name}</Text>
+                <Text style={styles.price}>{props.housing.pricing_quote.rate.amount_formatted} par nuit</Text>
+                <Stars size={10} stars={props.housing.listing.star_rating}></Stars>
             </View>
-        );
-    }
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

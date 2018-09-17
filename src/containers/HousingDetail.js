@@ -17,6 +17,7 @@ class HousingDetail extends Component {
 
     render() {
         if (this.props.housing) {
+            console.log(this.props.housing);
             const { listing, pricing_quote } = this.props.housing;
             return (
                 <View style={styles.housing}>
@@ -28,7 +29,7 @@ class HousingDetail extends Component {
                             <Text style={styles.city}>({listing.city})</Text>
                         </View>
                         <Text style={styles.textBold}>{listing.space_type} - {listing.guest_label}</Text>
-                        <Text style={styles.text}>Hôte: {listing.user.first_name}</Text>
+                        <Text style={styles.text}>Hôte: {listing.user.first_name !== ' ' ? listing.user.first_name : 'Inconnu'}</Text>
                         <View style={styles.ratingAndPrice}>
                             <Stars size={35} stars={listing.star_rating}></Stars>
                             <Text style={styles.text}>

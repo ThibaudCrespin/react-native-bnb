@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -24,13 +24,14 @@ class HousingList extends Component {
 
     render() {
         return (
-            <ListView
+            <FlatList
                 contentContainerStyle={styles.container}
                 enableEmptySections={true}
-                dataSource={this.props.housings}
-                renderRow={(row) =>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('detail', { id: row.listing.id })}>
-                        <HousingListItem housing={row}></HousingListItem>
+                data={this.props.housings}
+                keyExtractor={item => item.listing.id.toString()}
+                renderItem={({item}) =>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('detail', { id: item.listing.id })}>
+                        <HousingListItem housing={item}></HousingListItem>
                     </TouchableOpacity>}
             />
         );
@@ -51,9 +52,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return {
-        housings: ds.cloneWithRows(state.housingList)
+        housings: state.housingList
     };
 }
 
